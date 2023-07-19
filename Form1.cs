@@ -20,13 +20,19 @@ namespace lab1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            PerformCalculations();
+        }
+
+        private void PerformCalculations()
+        {
             Handler handler = new Handler();
             Stopwatch sw = new Stopwatch();
             sw.Start();
             handler.SeqHandling();
             sw.Stop();
             chart1.Series[0].Points.AddXY(0, sw.ElapsedMilliseconds);
-            for(int i = 1; i <= 8; i++)
+
+            for (int i = 1; i <= 8; i++)
             {
                 handler = new Handler();
                 sw.Restart();
@@ -34,6 +40,14 @@ namespace lab1
                 sw.Stop();
                 chart1.Series[0].Points.AddXY(i, sw.ElapsedMilliseconds);
             }
+        }
+
+        private void buttonStartParallel_Click(object sender, EventArgs e)
+        {
+            // Clear existing data in the chart
+            chart1.Series[0].Points.Clear();
+            
+            PerformCalculations();
         }
     }
 
